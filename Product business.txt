@@ -43,15 +43,15 @@ I.Xây dựng hệ thống:
 
 7.Items : 
 	Bảng Items bao gồm id_items , id_product , id_color , id_size , image_items 
-	Bảng items quản lý các tính chất cơ bản của các item, các tính chất này được thêm vào từ đầu và ít thay đổi , ít ảnh hưởng tới việc quản lý mua bán sản 	phẩm giữa các người dùng như màu sắc , size , và hình ảnh của sản phẩm đó 
+	Bảng items quản lý các tính chất cơ bản của các item, các tính chất này được thêm vào từ đầu và ít thay đổi , ít ảnh hưởng tới việc quản lý mua bán sản phẩm giữa các người dùng như màu sắc , size , và hình ảnh của sản phẩm đó 
 	Bảng Items liên kết với bảng product , item , color, size  qua id_product , id_item, ...
 	ơ bảng items , id_items là tự tạo và duy nhất
 
 8.Item :  
-	Bảng Item bao gồm   item_id , id_items , price , quantity ,discount , status 
+	Bảng Item bao gồm  item_id , id_items , price , quantity ,discount , status 
 	id_item được tự tạo và không trùng lặp
 	Bảng Item liên kết với bảng Items qua id_items , ở bảng Item các item có thể có trùng id_items điều này giúp quản lý các item một các cụ thể 
-	Chúng ta sẽ không xóa các item mà có thể tạo ra các item giống nhau chỉ khác ở price và discount điều này giúp giải quyết vấn đề một item có các tính 	chất cần thay đổi liên tục(price, discount) nhưng vẫn cần xử lý nhiều phiên bản khác nhau của item đấy trong cùng một thời điểm
+	Chúng ta sẽ không xóa các item mà có thể tạo ra các item giống nhau chỉ khác ở price và discount điều này giúp giải quyết vấn đề một item có các tính chất cần thay đổi liên tục(price, discount) nhưng vẫn cần xử lý nhiều phiên bản khác nhau của item đấy trong cùng một thời điểm
 	Quantity thể hiện số lượng sản phẩm còn lại
 	Status thể hiện trạng thái hoạt động của item là active hay inactive
 
@@ -80,8 +80,8 @@ II.Tính năng :
 	Check người đang thực hiện hành động là admin
 	Trang admin sẽ hiện một form đầy đủ các trường liên quan đến một sản phẩm, 
 	- admin phải nhập bằng tay các trường như tên sản phẩm , price , discount , quantity 
-	- admin lựa chọn các trường "color , size , category , type" thông qua việc hệ thống gợi ý các số liệu sẵn có mà hệ thống đã lưu hoặc tự nhập tay nếu 	muốn hoặc chưa có.Các trường color , size , category , type này sẽ được check dữ liệu có trùng với dữ liệu trong bảng không,nếu chưa có sẽ thêm mới để 	gợi ý lần sau
- 	( ví dụ trên hệ thống đã lưu các màu xanh đỏ tím vàng hoặc đã lưu tên các hãng là nike , adidas ... admin chỉ cần lựa chọn thông qua gợi ý từ form, nếu 	chưa có admin cần thêm vào bằng tay)
+	- admin lựa chọn các trường "color , size , category , type" thông qua việc hệ thống gợi ý các số liệu sẵn có mà hệ thống đã lưu hoặc tự nhập tay nếu muốn hoặc chưa có.Các trường color , size , category , type này sẽ được check dữ liệu có trùng với dữ liệu trong bảng không,nếu chưa có sẽ thêm mới để gợi ý 	lần sau
+ 	( ví dụ trên hệ thống đã lưu các màu xanh đỏ tím vàng hoặc đã lưu tên các hãng là nike , adidas ... admin chỉ cần lựa chọn thông qua gợi ý từ form, nếu chưa có admin cần thêm vào bằng tay)
 	Form sẽ phân loại các trường theo nhóm các bảng Product, Items , Item để thêm vào các bảng, check trùng nếu trùng thì ko cần thêm 
 
 5. Yêu cầu với tính năng sửa sản phẩm
