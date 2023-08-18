@@ -1,0 +1,103 @@
+Mô tả chức năng quan của phần Product 
+
+
+I.Xây dựng hệ thống: 
+
+1. Brand : 
+	Bảng brand bao gồm : id_brand, brand_name, Số lượng sản phẩm đã bán , satus
+	Các giá trị id_brand và brand_name là không trùng lặp
+	status thể hiện brand đang active hay inactive
+
+
+2.Type   : 
+	Bảng type quản lý các thể loại của sản phâm như ( thời trang , thể thao , công sở ...)
+	Bảng bao gồm id_type và type_name 
+	Các giá trị id_type và type_name là không trùng lặp
+	Bảng liên kết với product bằng id_type để cho biết type của product 
+
+3.Category : 
+	Bảng category quản lý các phân khúc đổi tượng khác hàng của sản phâm ( người lớn và trẻ em)
+	Bảng bao gồm id_category và category_name 
+	Các giá trị id_category và category_name là không trung lặp
+	Bảng liên kết với product bằng id_category để cho biết category của product 
+
+4.Color    : 
+	Bảng bao gồm id_color và color_name 
+	Bảng color quản lý các màu sắc của sản phâm như ( vàng đỏ ...)
+	Các giá trị id_color và color_name là không trung lặp
+
+	Bảng liên kết với items bằng id_color để cho biết các color của product 
+
+5.Size     : 
+	Bảng Size quản lý các kích thước của sản phẩm đó như ( size 8 , size 9 size 10 ) 
+	Bảng bao gồm id_size và size_name 
+	Các giá trị id_size và size_name là không trùng lặp
+	Bảng liên kết với items bằng id_size để cho biết các size của product 
+
+6.Product : 
+	Bảng Product bao gồm : id_Product , id_brand ,  product_name , id_type , id_category
+	Product sẽ quản lý chủ yếu các loại sản phẩm ở mỗi brand 
+	với mỗi product sẽ có một id_product 
+	liên hệ với bảng brand qua id_brand để biết sản phẩm này thuộc brand gì 
+	điều này tương tự với id_tpye và id category 
+
+7.Items : 
+	Bảng Items bao gồm id_items , id_product , id_color , id_size , image_items 
+	Bảng items quản lý các tính chất cơ bản của các item, các tính chất này được thêm vào từ đầu và ít thay đổi , ít ảnh hưởng tới việc quản lý mua bán sản 	phẩm giữa các người dùng như màu sắc , size , và hình ảnh của sản phẩm đó 
+	Bảng Items liên kết với bảng product , item , color, size  qua id_product , id_item, ...
+	ơ bảng items , id_items là tự tạo và duy nhất
+
+8.Item :  
+	Bảng Item bao gồm   item_id , id_items , price , quantity ,discount , status 
+	id_item được tự tạo và không trùng lặp
+	Bảng Item liên kết với bảng Items qua id_items , ở bảng Item các item có thể có trùng id_items điều này giúp quản lý các item một các cụ thể 
+	Chúng ta sẽ không xóa các item mà có thể tạo ra các item giống nhau chỉ khác ở price và discount điều này giúp giải quyết vấn đề một item có các tính 	chất cần thay đổi liên tục(price, discount) nhưng vẫn cần xử lý nhiều phiên bản khác nhau của item đấy trong cùng một thời điểm
+	Quantity thể hiện số lượng sản phẩm còn lại
+	Status thể hiện trạng thái hoạt động của item là active hay inactive
+
+
+
+
+II.Tính năng : 
+
+
+1. Yêu cầu với tính năng Thêm Brand : 
+	Check người đang thêm có quyền là admin 
+	Một brand mới được thêm vào bảng bởi admin, admin thêm 1 brand mới vào bảng qua một form
+	Ở bảng brand , tên các brand là riêng biệt do vậy admin cần thêm một brand mới ko trùng với các brand cũ 
+	
+2. Yêu cầu với tính năng sửa tên brand 
+	Check người đang sửa tên brand là admin 
+	Khi admin cần sửa tên brand, admin cần lựa chọn brand cần sửa qua trang admin và nhập tên brand mới qua một form
+
+3. Yêu cầu với tính năng xóa brand
+	check người đang xóa là admin
+	Để đảm bảo các tính nắng lịch sử mua hàng,các brand không thể bị xóa mà chuyển status từ active thành inactive 
+
+< các yêu cầu của các tính năng với brand tương tự với các yêu cầu của các tính năng với color , size ,type , Category>
+
+4. Yêu cầu với tính năng thêm sản phẩm : 
+	Check người đang thực hiện hành động là admin
+	Trang admin sẽ hiện một form đầy đủ các trường liên quan đến một sản phẩm, 
+	- admin phải nhập bằng tay các trường như tên sản phẩm , price , discount , quantity 
+	- admin lựa chọn các trường "color , size , category , type" thông qua việc hệ thống gợi ý các số liệu sẵn có mà hệ thống đã lưu hoặc tự nhập tay nếu 	muốn hoặc chưa có.Các trường color , size , category , type này sẽ được check dữ liệu có trùng với dữ liệu trong bảng không,nếu chưa có sẽ thêm mới để 	gợi ý lần sau
+ 	( ví dụ trên hệ thống đã lưu các màu xanh đỏ tím vàng hoặc đã lưu tên các hãng là nike , adidas ... admin chỉ cần lựa chọn thông qua gợi ý từ form, nếu 	chưa có admin cần thêm vào bằng tay)
+	Form sẽ phân loại các trường theo nhóm các bảng Product, Items , Item để thêm vào các bảng, check trùng nếu trùng thì ko cần thêm 
+
+5. Yêu cầu với tính năng sửa sản phẩm
+	Check người đang thực hiện hành động là admin
+	Hệ thống đưa ra một form đã chứa các dữ liệu của sản phẩm trước đó , admin thay đổi các trường sản phẩm theo ý muốn của admin
+	Sản phẩm cũ sau khi bị thay đổi sẽ đổi trạng thái status ở bảng Item thành inactive 
+	Sản phảm sau khi sửa sẽ được thêm mới như các thêm mới một sản phẩm mới
+
+6. Yêu cầu với tính năng xóa sản phẩm 
+	Check người đang thực hiệu hành động là admin 
+	chuyển status của sản phẩm ở bảng item thành inactive
+
+7. Các đơn hàng thành công sẽ cộng số lượng sản phẩm bán được của mỗi brand trong đơn hàng thành công ấy vào *số lượng sản phẩm đã bán* trong bảng brand
+
+	
+8. Các sản phẩm được tìm kiếm thông qua 2 trường là id_product và  product_name
+   Xây dựng tính năng tìm kiếm tuyệt đối đối với trường id_product và tìm kiếm tương đổi với trường product_name
+
+	
